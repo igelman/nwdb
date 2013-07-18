@@ -8,9 +8,9 @@ public class WordCounter extends HashMap<String, Integer> {
 	HashMap<String, Integer> words; // count of each unique word in string
 	
 	// Constructor
-	HashMap<String, Integer> WordCounter() {
-		HashMap<String, Integer> words = new HashMap<String, Integer>();
-		return words;
+	WordCounter() {
+		//HashMap<String, Integer> words = new HashMap<String, Integer>();
+		//return words;
 	}
 	
 	public void countWords(String paragraph) {
@@ -29,26 +29,24 @@ public class WordCounter extends HashMap<String, Integer> {
         }
 		s.close();
 	}
-	
-	public HashMap<String, Integer> removeStopwords() {
-		ArrayList<String> Stopwords = new ArrayList<String>();
-		Stopwords.add("a");
-		Stopwords.add("an");
-		Stopwords.add("and");
+
+	public void removeStopwords() {
+		StopWords sw = new StopWords();
+		ArrayList<String> swList = sw.getStopWords("stopwords.txt");
 		
-		words.put("stopWordsIgnored", 0); // initialize value of stopWordsIgnored
+		this.put("stopWordsIgnored", 0); // initialize value of stopWordsIgnored
 
 		// remove stopwords
 		// increment value of stopWordsIgnored by the amount removed
 		int countStopwords = 0;
-		for (String Stopword: Stopwords) {
-			countStopwords += words.get(Stopword);
-			words.remove(Stopword);
+		for (String stopword: swList) {
+			if (this.containsKey(stopword)) {
+				countStopwords += this.get(stopword);
+				this.remove(stopword);	
+			}
 		}
 		
-		words.put("stopWordsIgnored", countStopwords);
-				
-		return words;
+		this.put("stopWordsIgnored", countStopwords);
 	}
 
 }

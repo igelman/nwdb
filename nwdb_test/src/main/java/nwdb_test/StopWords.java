@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class StopWords {
+	// Create arraylist of words from fileName
 	ArrayList<String> sw;
 	
 	// Constructor

@@ -1,7 +1,5 @@
 package nwdb_test;
 
-import java.util.HashMap;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,8 +8,6 @@ import org.junit.Test;
 
 public class TestWordCounter {
 	private String paragraph;
-	private HashMap<String, Integer> words;
-
 	@Before
 	public void setUp() throws Exception {
 		paragraph = "word1 word2 word2 word3 word3 word3 word4 word4 word4 word4 a an and";
@@ -20,21 +16,21 @@ public class TestWordCounter {
 	@After
 	public void tearDown() throws Exception {
 		paragraph = "";
-		words.clear();
+		//words.clear();
 	}
 	
 	@Test
 	public void testCountAllUniques() {
 		WordCounter wc = new WordCounter();
-		words = wc.countWords(paragraph);
+		wc.countWords(paragraph);
 		
-		int word1Count = words.get("word1");
-		int word2Count = words.get("word2");
-		int word3Count = words.get("word3");
-		int word4Count = words.get("word4");
-		int aCount = words.get("a");
-		int anCount = words.get("an");
-		int andCount = words.get("and");
+		int word1Count = wc.get("word1");
+		int word2Count = wc.get("word2");
+		int word3Count = wc.get("word3");
+		int word4Count = wc.get("word4");
+		int aCount = wc.get("a");
+		int anCount = wc.get("an");
+		int andCount = wc.get("and");
 		Assert.assertEquals("count of word1: " + word1Count,1,word1Count);
 		Assert.assertEquals("count of word2: " + word2Count,2,word2Count);
 		Assert.assertEquals("count of word3: " + word3Count,3,word3Count);
@@ -47,16 +43,16 @@ public class TestWordCounter {
 	@Test
 	public void testRemoveStopwords() {
 		WordCounter wc = new WordCounter();
-		words = wc.countWords(paragraph);
-		words = wc.removeStopwords();
+		wc.countWords(paragraph);
+		wc.removeStopwords();
 		
-		GsonOutput gson = new GsonOutput(words);
+		GsonOutput gson = new GsonOutput(wc);
 		String json = gson.getJson();
-		System.out.println("words HashMap: " + json);
+		System.out.println("wc HashMap: " + json);
 		
-		Assert.assertFalse("check to see if 'a' is in words", words.containsKey("a"));
-		Assert.assertFalse("check to see if 'an' is in words", words.containsKey("an"));
-		Assert.assertTrue("count of stopwords: " + words.get("stopWordsIgnored"), words.get("stopWordsIgnored").equals(3));
+		Assert.assertFalse("check to see if 'a' is in words", wc.containsKey("a"));
+		Assert.assertFalse("check to see if 'an' is in words", wc.containsKey("an"));
+		Assert.assertTrue("count of stopwords: " + wc.get("stopWordsIgnored"), wc.get("stopWordsIgnored").equals(3));
 	}
 	
 	@Ignore @Test

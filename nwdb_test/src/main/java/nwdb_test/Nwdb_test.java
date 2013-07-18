@@ -4,29 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.w3c.dom.NodeList;
 
 public class Nwdb_test {
 
 	public static void main(String[] args) {
-		// Create hashmap to store word counts
-		HashMap words = new HashMap();
-		
-		// Create int to count stopwords
-		  // initialize to 0
-		int swCount = 0;
-		
-		// Read stopwords.txt into arraylist of words to ignore
-		StopWords sw = new StopWords();
-		ArrayList<String> swList = sw.getStopWords("stopwords.txt");
-		
 		// Set number or articles to analyze.
-		  // Default is 100.
 		int articlesLimit = 100;
-		  // Take and arg or user input for number of articles to analyze	
+		// Extension: Take and arg or user input for number of articles to analyze.
+		//  Default is 100
 		
 		// Read content from "http://www.thedailybeast.com/feed/articles.rss.xml?limit=" + articlesLimit
 		String url = "http://www.thedailybeast.com/feed/articles.rss.xml?limit=" + articlesLimit;
@@ -41,6 +28,7 @@ public class Nwdb_test {
 			e.printStackTrace();
 		}
 		
+		// Parse item/description nodes (not channel/description)
 		XmlParser xp = new XmlParser(in);
 		String xExpression = "rss/channel/item/description";
 		NodeList xpNodeList = xp.nodeList(xExpression);
@@ -48,18 +36,15 @@ public class Nwdb_test {
 		// Initialize word counter hashmap
 		WordCounter wc = new WordCounter();
 		for (int i = 0; i < xpNodeList.getLength(); i++) {
-			
-			System.out.println(xpNodeList.item(i).getFirstChild().getNodeValue());
+			String currentDescription = xpNodeList.item(i).getFirstChild().getNodeValue(); 
+			wc.countWords(currentDescription);
 		}
 		
-		
-		// For each "description" element:
-		//  Increment stopwords for each stopword encountered 
-		//  Add to words each unique non-stopword as key and increment value 
-
+		// Remove stopwords from the hashmap
+		wc.removeStopwords();
 		
 		// Output stopwords and words to json
-		GsonOutput gson = new GsonOutput("An object");
+		GsonOutput gson = new GsonOutput(wc);
 		String json = gson.getJson();
 		
 		System.out.println(json);
