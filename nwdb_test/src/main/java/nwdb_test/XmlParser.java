@@ -36,22 +36,6 @@ public class XmlParser {
 			e.printStackTrace();
 		}
 	}
-	
-	// Construct XPath object xPath and xmlDocument
-	//  from String xmlContent
-	XmlParser(String xmlContent) {
-		System.out.println("xmlParser.xmlContent: " + xmlContent);
-		xPath =  XPathFactory.newInstance().newXPath();
-		
-		DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-		try {
-			builderFactory.newDocumentBuilder();	
-			
-			//xmlDocument = builder.parse(xmlContent);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();  
-		}
-	}
 
 	public String nodeContent(String xExpression) {
 	// Return results of query xExpression on xmlDocument 

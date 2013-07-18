@@ -9,20 +9,24 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestGsonOutput {
+	private HashMap<String, HashMap> output;
 	private HashMap<String, Integer> words;
 	
 	@Before
 	public void setUp() throws Exception {
 		words = new HashMap<String, Integer>();
-		words.put("word1", 1);
-		words.put("word2", 2);
-		words.put("word3", 3);
-		words.put("word4", 4);
+		words.put("foo", 1000);
+		words.put("bar", 500);
+		
+		int stopWordsIgnored = 10000;
+		
+		output = new HashMap<String, HashMap>();
+
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		words.clear();
+		output.clear();
 	}
 
 	@Test
@@ -41,8 +45,22 @@ public class TestGsonOutput {
 	}
 	
 	@Ignore @Test
-	public void testJsonHasCorrectStructure () {
-		
+	public void testJsonHasCorrectStructure() {
+		String expectedOutput = "{\n"
+			    + "\"words\": [\n"
+			    + "          {\n"
+			    + "          \"word\": \"foo\",\n"
+			    + "          \"count\": 1000\n"
+			    + "       },\n"
+			    + "       {\n"
+			    + "           \"word\": \"bar\",\n"
+			    + "           \"count\": 500\n"
+			    + "       }\n"
+			    + "   ],\n"
+			    + "   \"stopWordsIgnored\": 10000\n"
+			    + "}";
+
+		Assert.assertEquals(expectedOutput, "");
 	}
 	
 
