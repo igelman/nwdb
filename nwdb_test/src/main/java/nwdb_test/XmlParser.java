@@ -7,12 +7,16 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+
+// Based on http://viralpatel.net/blogs/java-xml-xpath-tutorial-parse-xml/
 public class XmlParser {
 	private XPath xPath;
 	private Document xmlDocument;
@@ -47,5 +51,16 @@ public class XmlParser {
 			e.printStackTrace();
 		}
 		return nodeContent;		
+	}
+	
+	public NodeList nodeList(String xExpression) {
+		NodeList nl = null;
+		try {
+			nl = (NodeList) xPath.compile(xExpression).evaluate(xmlDocument, XPathConstants.NODESET);
+		} catch (XPathExpressionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nl;
 	}
 }
