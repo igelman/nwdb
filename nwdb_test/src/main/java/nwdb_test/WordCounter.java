@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class WordCounter {
-	private HashMap<String, Integer> words; // count of each unique word in string
+public class WordCounter extends HashMap<String, Integer> {
+	HashMap<String, Integer> words; // count of each unique word in string
 	
 	// Constructor
-	WordCounter() {
-		words = new HashMap<String, Integer>();
+	HashMap<String, Integer> WordCounter() {
+		HashMap<String, Integer> words = new HashMap<String, Integer>();
+		return words;
 	}
 	
-	public HashMap<String, Integer> countWords(String paragraph) {
+	public void countWords(String paragraph) {
 		//  http://docs.oracle.com/javase/tutorial/essential/io/scanning.html
 		Scanner s = new Scanner(paragraph);
 		while (s.hasNext()) {
@@ -20,14 +21,13 @@ public class WordCounter {
 			// Don't worry about stopWords; we'll count and remove them from the HashMap later, rather than checking the entire stopWords list for every word encountered here  
 			int count = 1;
 			String currentWord = s.next();
-			if ( words.containsKey(currentWord) ) {
-				count = words.get(currentWord) + 1;
+			if ( this.containsKey(currentWord) ) {
+				count = this.get(currentWord) + 1;
 			}
-			words.put(currentWord, count);
+			this.put(currentWord, count);
 			//System.out.println("Word: " + currentWord + "Count: " + count);
         }
 		s.close();
-		return words;
 	}
 	
 	public HashMap<String, Integer> removeStopwords() {
