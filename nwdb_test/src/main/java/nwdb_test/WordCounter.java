@@ -14,7 +14,7 @@ public class WordCounter {
 		this.paragraph = paragraph;
 	}
 	
-	public HashMap countWords() {
+	public HashMap<String, Integer> countWords() {
 		//  http://docs.oracle.com/javase/tutorial/essential/io/scanning.html
 		Scanner s = new Scanner(paragraph);
 		while (s.hasNext()) {
@@ -28,10 +28,11 @@ public class WordCounter {
 			words.put(currentWord, count);
 			//System.out.println("Word: " + currentWord + "Count: " + count);
         }
+		s.close();
 		return words;
 	}
 	
-	public HashMap removeStopwords() {
+	public HashMap<String, Integer> removeStopwords() {
 		ArrayList<String> Stopwords = new ArrayList<String>();
 		Stopwords.add("a");
 		Stopwords.add("an");

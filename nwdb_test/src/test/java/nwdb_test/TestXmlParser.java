@@ -13,24 +13,29 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class TestXmlParser {
-	private String firstDescription;
+	private String firstDescription = "The Daily Pic: Josephine Meckseper plucks her art from our commodity culture.";
+	private String actualFirstDescription = "";
+	private String xExpression = "rss/channel/item/description";
+	
+	private String getActualFirstDescription(InputStream in) {
+		XmlParser xp = new XmlParser(in);
+		return xp.nodeContent(xExpression);
+	}
+	
 	@Before
-	public void setUp() throws Exception {
-		firstDescription = "The Daily Pic: Josephine Meckseper plucks her art from our commodity culture.";
+	public void setUp() throws Exception { 
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
-
+	
 	@Test
+	// Test parser on local file
 	public void testGetFirstDescriptionFromFile() {
-		String xExpression = "rss/channel/item/description";
 		String fileName = "articles.rss.xml";
 		InputStream in = this.getClass().getClassLoader().getResourceAsStream(fileName);
-		
-		XmlParser xp = new XmlParser(in);
-		String actualFirstDescription = xp.nodeContent(xExpression);
+		actualFirstDescription = getActualFirstDescription(in);
 		
 		System.out.println("testGetFirstDescriptionFromFile ...");
 		System.out.println("Expected: " + firstDescription);
@@ -39,15 +44,14 @@ public class TestXmlParser {
 	}
 	
 	@Test
+	// Test parser on remote url
 	public void testGetFirstDescriptionFromUrl() {
-		String xExpression = "rss/channel/item/description";
 		String url = "http://igelman.com/nwdb/articles.rss.xml";
-		String actualFirstDescription = "";
+	
 		InputStream in;
 		try {
 			in = new URL(url).openStream();
-			XmlParser xp = new XmlParser(in);
-			actualFirstDescription = xp.nodeContent(xExpression);
+			actualFirstDescription = getActualFirstDescription(in);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
