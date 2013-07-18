@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-public class testXmlParser {
+public class TestXmlParser {
 	private String hardCodedXml;
 	private String firstDescription;
 	private String lastDescription;
@@ -33,7 +33,7 @@ public class testXmlParser {
 		String xExpression = "rss/channel/item/description";
 		InputStream in = this.getClass().getClassLoader().getResourceAsStream("articles.rss.xml");
 		
-		xmlParser xp = new xmlParser(in);
+		XmlParser xp = new XmlParser(in);
 		String actualFirstDescription = xp.nodeContent(xExpression);
 		assertEquals(firstDescription, actualFirstDescription);
 	}
@@ -53,7 +53,7 @@ public class testXmlParser {
 		int expectedCount = 5;
 		int actualCount;
 		
-		xmlParser xp = new xmlParser(hardCodedXml); 
+		XmlParser xp = new XmlParser(hardCodedXml); 
 	}
 
 }

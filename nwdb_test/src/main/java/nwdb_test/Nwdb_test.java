@@ -2,7 +2,7 @@ package nwdb_test;
 
 import java.util.HashMap;
 
-public class nwdb_test {
+public class Nwdb_test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -27,7 +27,7 @@ public class nwdb_test {
 		
 		// Output stopwords and words to json
 
-		gsonOutput gson = new gsonOutput("An object");
+		GsonOutput gson = new GsonOutput("An object");
 		String json = gson.getJson();
 		
 		System.out.println(json);

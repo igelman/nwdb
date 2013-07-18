@@ -7,12 +7,12 @@ import com.google.gson.GsonBuilder;
 // Based on demos at
 //  http://www.mkyong.com/java/how-do-convert-java-object-to-from-json-format-gson-api/
 //  http://www.mkyong.com/java/how-to-enable-pretty-print-json-output-gson/
-public class gsonOutput {
+public class GsonOutput {
 	private Gson gson;
 	private String json;
 
 	// Constructor creates a new Gson from object obj
-	gsonOutput(Object obj) {
+	GsonOutput(Object obj) {
 		// Instantiate gson object
 		gson = new GsonBuilder().setPrettyPrinting().create();
 		json = gson.toJson(obj);

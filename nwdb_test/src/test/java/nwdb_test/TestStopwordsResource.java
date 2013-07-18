@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class testStopwordsResource {
+public class TestStopwordsResource {
 
 	@Before
 	public void setUp() throws Exception {

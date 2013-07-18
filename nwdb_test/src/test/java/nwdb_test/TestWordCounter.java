@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class testWordCounter {
+public class TestWordCounter {
 	private String paragraph;
 	private HashMap<String, Integer> words;
 
@@ -25,7 +25,7 @@ public class testWordCounter {
 
 	@Test
 	public void testCountAllUniques() {
-		wordCounter wc = new wordCounter(paragraph);
+		WordCounter wc = new WordCounter(paragraph);
 		words = wc.countWords();
 		
 		int word1Count = words.get("word1");
@@ -46,11 +46,11 @@ public class testWordCounter {
 	
 	@Test
 	public void testRemoveStopwords() {
-		wordCounter wc = new wordCounter(paragraph);
+		WordCounter wc = new WordCounter(paragraph);
 		words = wc.countWords();
 		words = wc.removeStopwords();
 		
-		gsonOutput gson = new gsonOutput(words);
+		GsonOutput gson = new GsonOutput(words);
 		String json = gson.getJson();
 		System.out.println("words HashMap: " + json);
 		

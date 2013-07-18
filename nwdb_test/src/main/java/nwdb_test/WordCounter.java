@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class wordCounter {
+public class WordCounter {
 	private String paragraph; // the string to be analyzed
 	private HashMap<String, Integer> words; // count of each unique word in string
 	
 	// Constructor
-	wordCounter(String paragraph) {
+	WordCounter(String paragraph) {
 		words = new HashMap<String, Integer>();
 		this.paragraph = paragraph;
 	}

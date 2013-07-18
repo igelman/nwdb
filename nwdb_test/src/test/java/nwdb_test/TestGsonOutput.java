@@ -1,14 +1,14 @@
 package nwdb_test;
 
-import static org.junit.Assert.*;
-
 import java.util.HashMap;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
-public class testGsonOutput {
+public class TestGsonOutput {
 	private HashMap<String, Integer> words;
 	
 	@Before
@@ -26,17 +26,24 @@ public class testGsonOutput {
 	}
 
 	@Test
-	public void test() {
-		gsonOutput gson;
+	public void testJsonIsString() {
+		GsonOutput gson;
 		String json;
 
 		// Check to see if getJson returns a string
-		gson = new gsonOutput(words);
+		gson = new GsonOutput(words);
 		json = gson.getJson();
 		
 		System.out.println(json);
-		assertTrue("json is a string", json instanceof String);
+		Assert.assertTrue("json is a string", json instanceof String);
+		// compare the actual string to expected string to be double sure.
 		
 	}
+	
+	@Ignore @Test
+	public void testJsonHasCorrectStructure () {
+		
+	}
+	
 
 }
