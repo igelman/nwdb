@@ -7,6 +7,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.w3c.dom.NodeList;
+
 public class Nwdb_test {
 
 	public static void main(String[] args) {
@@ -40,6 +42,16 @@ public class Nwdb_test {
 		}
 		
 		XmlParser xp = new XmlParser(in);
+		String xExpression = "rss/channel/item/description";
+		NodeList xpNodeList = xp.nodeList(xExpression);
+		
+		// Initialize word counter hashmap
+		WordCounter wc = new WordCounter();
+		for (int i = 0; i < xpNodeList.getLength(); i++) {
+			
+			System.out.println(xpNodeList.item(i).getFirstChild().getNodeValue());
+		}
+		
 		
 		// For each "description" element:
 		//  Increment stopwords for each stopword encountered 

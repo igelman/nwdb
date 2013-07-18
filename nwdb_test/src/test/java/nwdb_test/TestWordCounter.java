@@ -22,11 +22,11 @@ public class TestWordCounter {
 		paragraph = "";
 		words.clear();
 	}
-
+	
 	@Test
 	public void testCountAllUniques() {
-		WordCounter wc = new WordCounter(paragraph);
-		words = wc.countWords();
+		WordCounter wc = new WordCounter();
+		words = wc.countWords(paragraph);
 		
 		int word1Count = words.get("word1");
 		int word2Count = words.get("word2");
@@ -46,8 +46,8 @@ public class TestWordCounter {
 	
 	@Test
 	public void testRemoveStopwords() {
-		WordCounter wc = new WordCounter(paragraph);
-		words = wc.countWords();
+		WordCounter wc = new WordCounter();
+		words = wc.countWords(paragraph);
 		words = wc.removeStopwords();
 		
 		GsonOutput gson = new GsonOutput(words);

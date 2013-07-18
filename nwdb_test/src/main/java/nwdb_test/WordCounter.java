@@ -5,16 +5,14 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class WordCounter {
-	private String paragraph; // the string to be analyzed
 	private HashMap<String, Integer> words; // count of each unique word in string
 	
 	// Constructor
-	WordCounter(String paragraph) {
+	WordCounter() {
 		words = new HashMap<String, Integer>();
-		this.paragraph = paragraph;
 	}
 	
-	public HashMap<String, Integer> countWords() {
+	public HashMap<String, Integer> countWords(String paragraph) {
 		//  http://docs.oracle.com/javase/tutorial/essential/io/scanning.html
 		Scanner s = new Scanner(paragraph);
 		while (s.hasNext()) {

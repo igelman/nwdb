@@ -13,6 +13,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.w3c.dom.NodeList;
 
 public class TestXmlParser {
 	private String expectedFirstDescription = "The Daily Pic: Josephine Meckseper plucks her art from our commodity culture.";
@@ -73,6 +74,7 @@ public class TestXmlParser {
 	public void testCountOfDescriptionNodes() {
 		int expectedCount = 5;
 		String url = "http://igelman.com/nwdb/articles.rss.xml?limit=" + limit;
+		//String url = "http://www.thedailybeast.com/feed/articles.rss.xml?limit=" + limit;
 		
 		InputStream in = null;
 		try {
@@ -86,7 +88,12 @@ public class TestXmlParser {
 		}
 		
 		XmlParser xp = new XmlParser(in);
-		int actualCount = xp.nodeList(xExpression).getLength();
+		NodeList xpNodeList = xp.nodeList(xExpression);
+		int actualCount = xpNodeList.getLength();
+		
+		for (int i = 0; i < xpNodeList.getLength(); i++) {
+			System.out.println(xpNodeList.item(i).getFirstChild().getNodeValue());
+		}
 		
 		String message = "Expected count of description nodes: " + expectedCount + "\nActual count: " + actualCount;
 		System.out.println("\ntestCountOfDescriptionNodes\n" + message);
@@ -105,6 +112,12 @@ public class TestXmlParser {
 		// SAXException
 		// IOException
 		// XPathExpressionException
+	}
+	
+	@Ignore @Test
+	public void testRetrieveFromThedailybeastdotcom() {
+		// Test that everything works from production service at thedailybeast.com
+		fail("xmlParser() exceptions are not yet implemented");
 	}
 
 
